@@ -90,19 +90,6 @@ spotify-this-song
     This will list an artist, the song name, a preview link, and the album it's from.
     If none is provided, then default will be "The Sign" by Ace of Base.
 
-movie-this
-    This outputs...
-    Title
-    Year
-    IMDB Rating
-    RT Rating
-    Country of Origin
-    Language
-    Plot
-    Actors
-
-    If none is provided, it will output Mr. Nobody.
-
 do-what-it-says
     Read the text inside random.txt and call one of the commands.
     This should run "spotify-this-song."

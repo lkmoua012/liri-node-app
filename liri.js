@@ -6,6 +6,7 @@ var request = require("request");
 var nodeArgs = process.argv;
 var command = process.argv[2];
 var movieName = "";
+var song_name = "";
 
 switch(command) {
 
@@ -15,7 +16,7 @@ switch(command) {
     break;
 
     case "spotify-this-song":
-    spotifythissong();
+    spotifythissong(song_name);
     break;
 
     case "movie-this":
@@ -58,7 +59,29 @@ function mytweets() {
 };
 
 //function spotifythissong(song_name) {
-function spotifythissong() {
+function spotifythissong(song_name) {
+
+    for (var i = 3; i < nodeArgs.length; i++) {
+
+        if (i > 3 && i < nodeArgs.length) {
+
+            song_name = song_name + "+" + nodeArgs[i];
+
+        }
+
+        else {
+
+            song_name += nodeArgs[i];
+
+        }
+    };
+
+    if (song_name === "") {
+
+        song_name = "The Sign";
+        console.log("Please enter a song after the command. For example, 'spotify-this-song The Sign'.\n");
+
+    };
 
 var Spotify = require('node-spotify-api');
  
@@ -68,9 +91,22 @@ var spotify = new Spotify({
 });
 
 spotify
-  .search({ type: 'track', query: 'Every Breath You Take', limit: '1' })
+  .search({ type: 'track', query: song_name, limit: '1' })
   .then(function(response) {
-    console.log(response.tracks.items);
+    //console.log(response.tracks.items);
+
+    // Artist Name
+    console.log("Artist: " + response.tracks.items[0].album.artists[0].name);
+
+    // Album Name
+    console.log("Album: " + response.tracks.items[0].album.name);
+
+    // Song Name
+    console.log("Song Title: "+ response.tracks.items[0].name);
+
+    // Preview Link
+    console.log("Preview Link: " + response.tracks.items[0].external_urls.spotify);
+
   })
   .catch(function(err) {
     console.log(err);
@@ -116,6 +152,7 @@ function moviethis() {
             console.log("Language: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
+            console.log(response);
 
         }
 

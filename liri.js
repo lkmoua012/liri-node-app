@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-//var spotify = new Spotify(keys.spotify);
 //var client = new Twitter(keys.twitter);
 
 var request = require("request");
@@ -12,11 +11,11 @@ switch(command) {
 
     case "my-tweets":
     // mytweets();
-    console.log("This should run mytweets()");
+    mytweets();
     break;
 
     case "spotify-this-song":
-    // spotifythissong();
+    spotifythissong();
     break;
 
     case "movie-this":
@@ -28,11 +27,54 @@ switch(command) {
     break;
 
     default:
-    console.log("Please enter a command. my-tweets spotify-this-song movie-this do-what-it-says")
+    console.log("Please enter a command. my-tweets spotify-this-song movie-this do-what-it-says");
 
 };
 
-function spotifythissong(song_name) {
+function mytweets() {
+
+    var Twitter = require('twitter');
+    var client = new Twitter({
+        consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+        access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+        access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+      });
+
+    var params = {screen_name: 'resrer012'};
+
+    console.log(params);
+
+        client.get('statuses/user_timeline'), params, function(error, tweets, response) {
+            
+            if (!error) {
+                console.log(tweets);
+                console.log(response);
+            };
+        };
+
+
+
+};
+
+//function spotifythissong(song_name) {
+function spotifythissong() {
+
+var Spotify = require('node-spotify-api');
+ 
+var spotify = new Spotify({
+  id: process.env.SPOTIFY_ID,
+  secret: process.env.SPOTIFY_SECRET
+});
+
+spotify
+  .search({ type: 'track', query: 'Every Breath You Take', limit: '1' })
+  .then(function(response) {
+    console.log(response.tracks.items);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 
 };
 

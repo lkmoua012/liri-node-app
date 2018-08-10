@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-//var client = new Twitter(keys.twitter);
-
 var request = require("request");
 var nodeArgs = process.argv;
 var command = process.argv[2];
@@ -42,23 +40,24 @@ function mytweets() {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
       });
 
-    var params = {screen_name: 'resrer012'};
+    var params = {screen_name: 'Resrer012', count: 5};
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
-    console.log(params);
+      if (!error) {
 
-        client.get('statuses/user_timeline'), params, function(error, tweets, response) {
-            
-            if (!error) {
-                console.log(tweets);
-                console.log(response);
-            };
+        for (i = 0; i < 0; i++) {
+
+            console.log("Date Created: " + tweets[i].created_at);
+            console.log("Tweet: " + tweets[i].text);
+
         };
 
+      }
 
+    });
 
 };
 
-//function spotifythissong(song_name) {
 function spotifythissong(song_name) {
 
     for (var i = 3; i < nodeArgs.length; i++) {
@@ -93,7 +92,6 @@ var spotify = new Spotify({
 spotify
   .search({ type: 'track', query: song_name, limit: '1' })
   .then(function(response) {
-    //console.log(response.tracks.items);
 
     // Artist Name
     console.log("Artist: " + response.tracks.items[0].album.artists[0].name);

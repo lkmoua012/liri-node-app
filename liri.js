@@ -7,7 +7,7 @@ var command = process.argv[2];
 var movieName = "";
 var song_name = "";
 var divider =
-"\n------------------------------------------------------------\n\n"
+"\n------------------------------------------------------------\n\n";
 
 switch(command) {
 
@@ -29,7 +29,7 @@ switch(command) {
     break;
 
     default:
-    console.log("Please enter a command. my-tweets spotify-this-song movie-this do-what-it-says");
+    console.log("Please enter a command.\nmy-tweets\nspotify-this-song\nmovie-this do-what-it-says");
 
 };
 

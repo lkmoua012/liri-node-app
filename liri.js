@@ -6,6 +6,8 @@ var nodeArgs = process.argv;
 var command = process.argv[2];
 var movieName = "";
 var song_name = "";
+var divider =
+"\n------------------------------------------------------------\n\n"
 
 switch(command) {
 
@@ -90,17 +92,17 @@ spotify
   .search({ type: 'track', query: song_name, limit: '1' })
   .then(function(response) {
 
-    // Artist Name
-    console.log("Artist: " + response.tracks.items[0].album.artists[0].name);
+    var spotifyData = [
+    "Artist: " + response.tracks.items[0].album.artists[0].name,
+    "Album: " + response.tracks.items[0].album.name,
+    "Song Title: "+ response.tracks.items[0].name,
+    "Preview Link: " + response.tracks.items[0].external_urls.spotify
+    ].join("\n\n");
 
-    // Album Name
-    console.log("Album: " + response.tracks.items[0].album.name);
-
-    // Song Name
-    console.log("Song Title: "+ response.tracks.items[0].name);
-
-    // Preview Link
-    console.log("Preview Link: " + response.tracks.items[0].external_urls.spotify);
+    fs.appendFile("log.txt", spotifyData + divider, function (err) {
+        if (err) throw err;
+        console.log(spotifyData);
+    })
 
   })
   .catch(function(err) {
@@ -139,14 +141,21 @@ function moviethis() {
 
         if (!error && response.statusCode === 200) {
 
-            console.log("Movie Title: " + JSON.parse(body).Title);
-            console.log("Release Year: " + JSON.parse(body).Year);
-            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-            console.log("RT Rating: " + JSON.parse(body).Ratings[1].Value);
-            console.log("Country: " + JSON.parse(body).Country);
-            console.log("Language: " + JSON.parse(body).Language);
-            console.log("Plot: " + JSON.parse(body).Plot);
-            console.log("Actors: " + JSON.parse(body).Actors);
+            var movieData = [
+                "Movie Title: " + JSON.parse(body).Title,
+                "Release Year: " + JSON.parse(body).Year,
+                "IMDB Rating: " + JSON.parse(body).imdbRating,
+                "RT Rating: " + JSON.parse(body).Ratings[1].Value,
+                "Country: " + JSON.parse(body).Country,
+                "Language: " + JSON.parse(body).Language,
+                "Plot: " + JSON.parse(body).Plot,
+                "Actors: " + JSON.parse(body).Actors
+            ].join("\n\n");
+
+            fs.appendFile("log.txt", movieData + divider, function (err) {
+                if (err) throw err;
+                console.log(movieData);
+            })
 
         }
 

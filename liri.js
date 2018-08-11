@@ -147,7 +147,6 @@ function moviethis() {
             console.log("Language: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
             console.log("Actors: " + JSON.parse(body).Actors);
-            console.log(response);
 
         }
 
@@ -156,37 +155,47 @@ function moviethis() {
 };
 
 function dowhatitsays() {
+
     fs.readFile("random.txt", "utf8", function(error, data) {
 
         if (error) {
             return console.log(error);
         };
 
-        console.log(data);
+        var childArray = [];
+        var slice1 = 0;
+        var slice2 = 2;
+        var masterArray = data.split(",");
 
-        var dataArray = data.split(",");
+        for (i = 0; i < masterArray.length / 2; i ++) {
 
-        console.log(dataArray);
+            childArray[i] = masterArray.slice(slice1, slice2);
+            slice1+=2;
+            slice2+=2;
 
-        // if array 0 is mytweets
+        };
 
-        // if array 0 i
+        var rng = Math.floor(Math.random() * childArray.length);
+        var chosendataArray = childArray[rng];
 
-        switch(dataArray[0]) {
+        switch(chosendataArray[0]) {
 
             case "spotify-this-song":
-            spotifythissong(dataArray[1]);
+            console.log("\nRunning spotify-this-song... for " + chosendataArray[1] + "\n");
+            spotifythissong(chosendataArray[1]);
             break;
 
             case "movie-this":
-            movieName = dataArray[1];
+            console.log("\nRunning movie-this... for " + chosendataArray[1] + "\n");
+            movieName = chosendataArray[1];
             moviethis();
             break;
 
         };
 
     })
-}
+
+};
 
 /*
 

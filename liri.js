@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+var fs = require("fs");
 var request = require("request");
 var nodeArgs = process.argv;
 var command = process.argv[2];
@@ -22,7 +23,7 @@ switch(command) {
     break;
 
     case "do-what-it-says":
-    // dowhatitsays();
+    dowhatitsays();
     break;
 
     default:
@@ -40,19 +41,15 @@ function mytweets() {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
       });
 
-    var params = {screen_name: 'Resrer012', count: 5};
+    var params = {screen_name: 'Resrer012', count: 20};
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
-      if (!error) {
+        for (i = 0; i < 20; i++) {
 
-        for (i = 0; i < 0; i++) {
+            console.log("\nDate Created: " + tweets[i].created_at);
+            console.log("Tweet: " + tweets[i].text + "\n");
 
-            console.log("Date Created: " + tweets[i].created_at);
-            console.log("Tweet: " + tweets[i].text);
-
-        };
-
-      }
+        }
 
     });
 
@@ -158,14 +155,40 @@ function moviethis() {
 
 };
 
-/* Liri.js should take in the following commands.
+function dowhatitsays() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
 
-my-tweets
-    This shows my last 20 tweets and when they were created in my terminal.
+        if (error) {
+            return console.log(error);
+        };
 
-spotify-this-song
-    This will list an artist, the song name, a preview link, and the album it's from.
-    If none is provided, then default will be "The Sign" by Ace of Base.
+        console.log(data);
+
+        var dataArray = data.split(",");
+
+        console.log(dataArray);
+
+        // if array 0 is mytweets
+
+        // if array 0 i
+
+        switch(dataArray[0]) {
+
+            case "spotify-this-song":
+            spotifythissong(dataArray[1]);
+            break;
+
+            case "movie-this":
+            movieName = dataArray[1];
+            moviethis();
+            break;
+
+        };
+
+    })
+}
+
+/*
 
 do-what-it-says
     Read the text inside random.txt and call one of the commands.

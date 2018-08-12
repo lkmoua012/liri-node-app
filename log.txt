@@ -166,3 +166,29 @@ Plot: A boy stands on a station platform as a train is about to leave. Should he
 Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
 ------------------------------------------------------------
 
+Artist: Overstreet
+
+Album: Hold On
+
+Song Title: Hold On
+
+Preview Link: https://open.spotify.com/track/5vjLSffimiIP26QG5WcN2K
+------------------------------------------------------------
+
+Movie Title: Ip Man
+
+Release Year: 2008
+
+IMDB Rating: 8.0
+
+RT Rating: 84%
+
+Country: Hong Kong, China
+
+Language: Cantonese, Mandarin, Japanese
+
+Plot: During the Japanese invasion of 1937, when a wealthy martial artist is forced to leave his home and work to support his family, he reluctantly agrees to train others in the art of Wing Chun for self-defense.
+
+Actors: Donnie Yen, Simon Yam, Lynn Hung, Hiroyuki Ikeuchi
+------------------------------------------------------------
+

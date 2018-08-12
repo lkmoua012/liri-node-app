@@ -6,6 +6,7 @@ var nodeArgs = process.argv;
 var command = process.argv[2];
 var movieName = "";
 var song_name = "";
+var userName = "";
 var divider =
 "\n------------------------------------------------------------\n\n";
 
@@ -29,11 +30,12 @@ switch(command) {
     break;
 
     default:
-    console.log("Please enter a command.\nmy-tweets\nspotify-this-song\nmovie-this do-what-it-says");
+    console.log("Please enter a command.\nmy-tweets\nspotify-this-song\nmovie-this\ndo-what-it-says");
 
 };
 
 function mytweets() {
+
 
     var Twitter = require('twitter');
     var client = new Twitter({
@@ -43,7 +45,16 @@ function mytweets() {
         access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
       });
 
-    var params = {screen_name: 'Resrer012', count: 20};
+      userName = nodeArgs[3];
+
+      if (userName === "") {
+
+        console.log("Please enter a Twitter username after the command.\n(e.g. my-tweets resrer012)");
+
+      };
+
+
+    var params = {screen_name: userName, count: 20};
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
 
         for (i = 0; i < 20; i++) {
@@ -205,11 +216,3 @@ function dowhatitsays() {
     })
 
 };
-
-/*
-
-do-what-it-says
-    Read the text inside random.txt and call one of the commands.
-    This should run "spotify-this-song."
-
-*/
